@@ -52,7 +52,7 @@
 							</span>
 						</li>
 						<li>
-							<a href="${contextPath}/shoppingCartRemoveProduct?code=${cartLineInfo.productInfo.code}">delete</a>
+							<a href="${contextPath}/shoppingCartRemoveProduct?code=${cartLineInfo.productInfo.code}">Delete</a>
 						</li>
 					</ul>
 				</div>			

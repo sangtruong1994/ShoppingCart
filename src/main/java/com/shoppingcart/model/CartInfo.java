@@ -105,7 +105,7 @@ public class CartInfo {
 	}
 	
 	public void updateQuantity(CartInfo cartForm) {
-		if(cartForm != null) {
+		if (cartForm != null) {
 			List<CartLineInfo> cartLineInfos = cartForm.getCartLineInfos();
 			for (CartLineInfo cartLineInfo : cartLineInfos) {
 				updateProduct(cartLineInfo.getProductInfo().getCode(), cartLineInfo.getQuantity());
