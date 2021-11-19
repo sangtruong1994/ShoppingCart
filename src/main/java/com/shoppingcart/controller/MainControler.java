@@ -4,10 +4,13 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +23,7 @@ import com.shoppingcart.model.CustomerInfo;
 import com.shoppingcart.model.PaginationResult;
 import com.shoppingcart.model.ProductInfo;
 import com.shoppingcart.util.Utils;
+import com.shoppingcart.validator.CustomerInfoValidator;
 
 
 @Controller
@@ -27,6 +31,9 @@ public class MainControler {
 
 	@Autowired
 	private ProductDAO productDAO;
+	
+	@Autowired
+	private CustomerInfoValidator customerInfoValidator;
 	
 	@RequestMapping({"/productList"})
 	public String getAllProductInfos(Model model, @RequestParam(value = "name", defaultValue = "") String likeName,
@@ -118,5 +125,39 @@ public class MainControler {
 		
 		model.addAttribute("customerForm",customerInfo);
 		return "shoppingCartCustomer";
+	}
+	
+	@RequestMapping(value = {"/shoppingCartCustomer"}, method = RequestMethod.POST)
+	public String shoppingCartCustomer(HttpServletRequest request,  Model model,
+			@ModelAttribute("customerForm") @Validated CustomerInfo customerForm, BindingResult result) {
+		customerInfoValidator.validate(customerForm, result);
+		//kết quả Validate CustomerInfo
+		if(result.hasErrors()) {
+			customerForm.setValid(false);
+			//Forward tới trang nhập lại
+			return "shoppingCartCustomer";
+		}
+		
+		customerForm.setValid(true);
+		CartInfo cartInfo = Utils.getCartInfoInSession(request);
+		cartInfo.setCustomerInfo(customerForm);
+		//chuyển hướng qua trang xác nhận
+		return "redirect:/shoppingCartConfirmation";
+	}
+	
+	//GET xem lai thong tin xac nhan
+	@RequestMapping(value = {"/shoppingCartConfirmation"}, method = RequestMethod.GET)
+	public String shoppingCartConfirmationReview(HttpServletRequest request,  Model model) {
+		CartInfo cartInfo = Utils.getCartInfoInSession(request);
+		
+		// chưa mua mặt hàng nào;
+		if(cartInfo.isEmpty()) {
+			// chuyen toi trang danh gio hang
+			return "redirect:/shoppingCart";
+		}else if (!cartInfo.isValidCustomer()) {
+			//chuyen toi trang nhap thong tin
+			return "redirect:/shoppingCartCustomer";
+		}
+		return "shoppingCartConfirmation";
 	}
 }

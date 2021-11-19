@@ -29,6 +29,10 @@ public class CustomerInfoValidator implements Validator{
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "NotEmpty.customerForm.email");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "phone", "NotEmpty.customerForm.phone");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "address", "NotEmpty.customerForm.address");
+		
+		if(!emailValidator.isValid(customerInfo.getEmail())) {
+			errors.rejectValue("email", "Pattern.customerForm.email");
+		}
 	}
 
 

@@ -3,5 +3,6 @@ encoding//src/main/java/com/shoppingcart/config/AppContext.java=UTF-8
 encoding//src/main/java/com/shoppingcart/config/AppInitializer.java=UTF-8
 encoding//src/main/java/com/shoppingcart/config/WebMvcConfig.java=UTF-8
 encoding//src/main/java/com/shoppingcart/config/WebSevurityConfig.java=UTF-8
+encoding//src/main/java/com/shoppingcart/controller/MainControler.java=UTF-8
 encoding//src/main/java/com/shoppingcart/dao/impl/ProductDAOImpl.java=UTF-8
 encoding//src/main/java/com/shoppingcart/util/Utils.java=UTF-8

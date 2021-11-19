@@ -46,7 +46,8 @@
 				<td>&nbsp;</td>
 				<td>
 					<input type="submit" value="Submit"/>
-					<input type="reset" value="Reset"/>
+					<input type="reset"	value="Reset" onclick="customReset();"/>
+
 				</td>
 			</tr>
 		</table>
