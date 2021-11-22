@@ -79,6 +79,7 @@ public class PaginationResult<E> {
 		this.navigationPages = navigationPages;
 	}
 
+	//tổng  sản phẩm có trong 1 page
 	public PaginationResult(Query query, int page, int maxResult, int maxNavigationPage) {
 		int pageIndex = page - 1 < 0 ? 0 : page - 1;
 		int fromRecordIndex = pageIndex * maxResult;

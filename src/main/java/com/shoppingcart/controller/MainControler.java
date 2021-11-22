@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.shoppingcart.dao.OrderDAO;
 import com.shoppingcart.dao.ProductDAO;
 import com.shoppingcart.entity.Product;
 import com.shoppingcart.model.CartInfo;
@@ -31,6 +32,9 @@ public class MainControler {
 
 	@Autowired
 	private ProductDAO productDAO;
+	
+	@Autowired
+	private OrderDAO orderDAO;
 	
 	@Autowired
 	private CustomerInfoValidator customerInfoValidator;
@@ -159,5 +163,45 @@ public class MainControler {
 			return "redirect:/shoppingCartCustomer";
 		}
 		return "shoppingCartConfirmation";
+	}
+	
+	//POST: Gui don hang (Save).
+	@RequestMapping(value = {"/shoppingCartConfirmation"}, method = RequestMethod.POST)
+	public String shoppingCartConfirmationSave(HttpServletRequest request,  Model model) {
+		CartInfo cartInfo = Utils.getCartInfoInSession(request);
+		
+		//chua mua mat hang nao
+		if(cartInfo.isEmpty()) {
+			//chuyen toi trang gio hang
+			return "redirect:/shoppingCart";
+		}else if (!cartInfo.isValidCustomer()) {
+			//chuyen toi trang nhap thong tin
+			return "redirect:/shoppingCartCustomer";
+		}
+		
+		try {
+			orderDAO.saveOrder(cartInfo);
+		} catch (Exception e) {
+			return "shoppingCartConfirmation";
+		}
+		
+		//xoa gio hang khoi session
+		Utils.removeCartInfoInSession(request);
+		
+		//luu thoong tin don hang da xac nhan mua
+		Utils.storeLastOrderedCartInfoInSession(request, cartInfo);
+		
+		//chuyen huong toi trang hoan thanh mua hang
+		return "redirect:/shoppingCartFinalize";
+	}
+	
+	@RequestMapping(value = {"/shoppingCartFinalize"}, method = RequestMethod.GET)
+	public String shoppingCartFinalize(HttpServletRequest request,  Model model) {
+		CartInfo lastOrderdCart = Utils.getLastOrderedCartInfoInSession(request);
+		
+		if(lastOrderdCart == null) {
+			return "redirect:/shoppingCart";
+		}
+		return "shoppingCartFinalize";
 	}
 }

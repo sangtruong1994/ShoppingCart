@@ -20,7 +20,7 @@
 				<a href="${contextPath }/logout">Logout</a>
 			</c:if>
 			<c:if test="${name == null}">
-				<a href="${contextPath }/login">Logout</a>
+				<a href="${contextPath }/login">Login</a>
 			</c:if>
 		</div>
 	</div>
