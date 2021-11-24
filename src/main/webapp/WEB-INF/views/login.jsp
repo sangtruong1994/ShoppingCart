@@ -34,7 +34,7 @@
 			<table>
 				<tr>
 					<td>Username *</td>
-					<td><input name="username"/></td>
+					<td><input name="userName"/></td>
 				</tr>
 				<tr>
 					<td>Password *</td>

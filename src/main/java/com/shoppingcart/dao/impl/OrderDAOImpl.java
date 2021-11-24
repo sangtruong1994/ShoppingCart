@@ -19,6 +19,8 @@ import com.shoppingcart.entity.Product;
 import com.shoppingcart.model.CartInfo;
 import com.shoppingcart.model.CartLineInfo;
 import com.shoppingcart.model.CustomerInfo;
+import com.shoppingcart.model.OrderInfo;
+import com.shoppingcart.model.PaginationResult;
 
 @Repository
 @Transactional
@@ -75,6 +77,15 @@ public class OrderDAOImpl implements OrderDAO{
 			session.persist(orderDetail);
 		}
 		cartInfo.setOrderNum(orderNum);
+	}
+
+	@Override
+	public PaginationResult<OrderInfo> getAllOrderInfos(int page, int maxResult, int maxNavigationPage) {
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "SELECT NEW " + OrderInfo.class.getName() + " (ORD.id, ORD.orderDate, ORD.orderNum, ORD.amount, ORD.customerName, ORD.customerAddress, " 
+				+ "ORD.customerEmail, ORD.customerPhone) FROM Order ORD ORDER BY ORD.orderNum DESC";
+		Query<OrderInfo> query = session.createQuery(hql);
+		return new PaginationResult<OrderInfo>(query, page, maxResult, maxNavigationPage);
 	}
 
 }

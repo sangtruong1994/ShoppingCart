@@ -96,11 +96,13 @@ public class PaginationResult<E> {
 				do {
 					E record = (E) resultsScroll.get(0);
 					results.add(record);
-				} while (resultsScroll.next() && resultsScroll.getRowNumber() >= fromRecordIndex
+				} while (resultsScroll.next() //có nhiệm vụ kiểm tra phần tử kế tiếp có tồn tại hay ko, nếu có sẽ trỏ tới phần tử kế tiếp
+						&& resultsScroll.getRowNumber() >= fromRecordIndex
 						&& resultsScroll.getRowNumber() < maxRecordIndex);
 			}
 			resultsScroll.last();
 		}
+		//tổng bản ghi
 		this.totalRecords = resultsScroll.getRowNumber() + 1;
 		this.currentPage = pageIndex + 1;
 		this.list = results;
