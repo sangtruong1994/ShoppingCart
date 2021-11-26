@@ -123,8 +123,8 @@ public class PaginationResult<E> {
 
 		int current = this.currentPage > this.totalPages ? this.totalPages : this.currentPage;
 
-		int begin = current - this.maxNavigationPages / 2;
-		int end = current + this.maxNavigationPages / 2;
+		int begin = current - this.maxNavigationPages / 2;//1 - 10/2 = -4
+		int end = current + this.maxNavigationPages / 2;//1 + 10/2 = 6
 
 		this.navigationPages.add(1);
 		if (begin > 2) {

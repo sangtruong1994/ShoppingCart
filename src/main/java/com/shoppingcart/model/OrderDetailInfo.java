@@ -8,7 +8,7 @@ public class OrderDetailInfo {
 	
 	private String productName;
 	
-	private int quatity;
+	private int quantity;
 	
 	private double price;
 	
@@ -16,13 +16,13 @@ public class OrderDetailInfo {
 
 	//Using for Hibernate Query
 	//Sử dụng cho Hibernate Query
-	public OrderDetailInfo(String id, String productCode, String productName, int quatity, double price,
+	public OrderDetailInfo(String id, String productCode, String productName, int quantity, double price,
 			double amount) {
 		super();
 		this.id = id;
 		this.productCode = productCode;
 		this.productName = productName;
-		this.quatity = quatity;
+		this.quantity = quantity;
 		this.price = price;
 		this.amount = amount;
 	}
@@ -51,12 +51,12 @@ public class OrderDetailInfo {
 		this.productName = productName;
 	}
 
-	public int getQuatity() {
-		return quatity;
+	public int getQuantity() {
+		return quantity;
 	}
 
-	public void setQuatity(int quatity) {
-		this.quatity = quatity;
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
 	public double getPrice() {

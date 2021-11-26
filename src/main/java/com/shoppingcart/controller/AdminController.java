@@ -1,5 +1,7 @@
 package com.shoppingcart.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.shoppingcart.dao.OrderDAO;
+import com.shoppingcart.model.OrderDetailInfo;
 import com.shoppingcart.model.OrderInfo;
 import com.shoppingcart.model.PaginationResult;
 
@@ -60,6 +63,22 @@ public class AdminController {
 		PaginationResult<OrderInfo> paginationOrderInfos = orderDAO.getAllOrderInfos(page, MAX_RESULT, MAX_NAVIGATION_PAGE);
 		model.addAttribute("paginationOrderInfos", paginationOrderInfos);
 		return "orderList";
+	}
+	
+	@RequestMapping(value = {"/order"}, method = RequestMethod.GET)
+	public String orderView(Model model, @RequestParam("orderId") String orderId) {
+		OrderInfo orderInfo = null;
+		if(orderId != null) {
+			orderInfo = orderDAO.getOrderInfoById(orderId);			
+		}
+		if(orderInfo == null) {
+			return "redirect:/orderList";
+		}
+		
+		List<OrderDetailInfo> orderDetailInfos = orderDAO.getAllDetailInfos(orderId);
+		orderInfo.setOrderDetailInfos(orderDetailInfos);
+		model.addAttribute("orderInfo",orderInfo);
+		return "order";
 	}
 	
 }

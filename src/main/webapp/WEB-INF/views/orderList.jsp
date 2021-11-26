@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Order List</title>
 <style type="text/css">
   <%@include file="css/styles.css" %> 
 </style>
@@ -37,12 +37,15 @@
 			<tr>
 				<td>${orderInfo.orderNum }</td>
 				<td>
-					<fmt:formatDate value="${orderInfo.orderDate }" pattern="dd-MM-yyyy HH:mm"/>
+					<fmt:formatDate value="${orderInfo.orderDate }" pattern="dd/MM/yyyy HH:mm:ss"/>
 				</td>
 				<td>${orderInfo.customerName }</td>
 				<td>${orderInfo.customerAddress}</td>
 				<td>${orderInfo.customerEmail }</td>
 				<td style="color: red;">
+					<fmt:formatNumber value="${orderInfo.amount }" type="currency"></fmt:formatNumber>
+				</td>
+				<td>
 					<a href="${contextPath}/order?orderId=${orderInfo.id }">View</a>
 				</td>
 			</tr>
