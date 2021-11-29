@@ -96,7 +96,7 @@ public class OrderDAOImpl implements OrderDAO{
 			return null;
 		}
 		
-		OrderInfo orderInfo = new OrderInfo(order.getId(), order.getOrderDate(), getMaxOrderNum(), order.getOrderNum(), order.getCustomerName(), order.getCustomerAddress(), order.getCustomerEmail(),
+		OrderInfo orderInfo = new OrderInfo(order.getId(), order.getOrderDate(), getMaxOrderNum(), order.getAmount(), order.getCustomerName(), order.getCustomerAddress(), order.getCustomerEmail(),
 				order.getCustomerPhone());
 		return orderInfo;
 	}

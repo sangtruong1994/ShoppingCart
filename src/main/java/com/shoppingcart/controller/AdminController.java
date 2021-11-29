@@ -7,20 +7,32 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.shoppingcart.dao.OrderDAO;
+import com.shoppingcart.dao.ProductDAO;
 import com.shoppingcart.model.OrderDetailInfo;
 import com.shoppingcart.model.OrderInfo;
 import com.shoppingcart.model.PaginationResult;
+import com.shoppingcart.model.ProductInfo;
+import com.shoppingcart.validator.ProductValidator;
 
 @Controller
 public class AdminController {
 	
 	@Autowired
 	private OrderDAO orderDAO;
+	
+	@Autowired
+	private ProductDAO productDAO;
+	
+	@Autowired
+	private ProductValidator productValidator;
 
 	@RequestMapping({"/403"})
 	public String accessDenied() {
@@ -81,4 +93,32 @@ public class AdminController {
 		return "order";
 	}
 	
+	@RequestMapping(value = {"/product"}, method = RequestMethod.GET)
+	public String product(Model model, @RequestParam(value = "code", defaultValue = "")String code) {
+		ProductInfo productInfo = null;
+		if(code != null && code.length() > 0) {
+			productInfo = productDAO.getProductInfoByCode(code);
+		}
+		if(productInfo == null) {
+			productInfo = new ProductInfo();
+			productInfo.setNewProduct(true);
+		}
+		return "product";
+	}
+	
+	@RequestMapping(value = {"/product"}, method = RequestMethod.POST)
+	public String productSave(Model model, @ModelAttribute("productForm") @Validated ProductInfo productInfo,
+			BindingResult result) {
+		productValidator.validate(productInfo, result);
+		if(result.hasErrors()) {
+			return "product";
+		}
+		try {
+			productDAO.saveProductInfo(productInfo);
+		} catch (Exception e) {
+			model.addAttribute("errorMessage", e.getMessage());
+			return "product";
+		}
+		return "redirect:/productList";
+	}
 }
