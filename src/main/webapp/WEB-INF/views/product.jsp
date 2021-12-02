@@ -29,13 +29,14 @@
 		<table style="text-align: left;">
 			<tr>
 				<td>Code *</td>
-				<td style="color: red;"><c:if
-						test="${not empty productForm.code}">
+				<td style="color: red;"><c:if test="${not empty productForm.code}">
 						<form:hidden path="code" /> ${productForm.code}
-				</c:if> <c:if test="${empty productForm.code}">
-						<form:input path="code" />
-						<form:hidden path="newProduct" />
-					</c:if></td>
+				</c:if> 
+				<c:if test="${empty productForm.code}">
+					<form:input path="code" />
+					<form:hidden path="newProduct" />
+				</c:if></td>
+				
 				<td><form:errors path="code" class="error-message" /></td>
 			</tr>
 
@@ -67,8 +68,7 @@
 
 			<tr>
 				<td>&nbsp;</td>
-				<td><input type="submit" value="Submit" /> <input type="reset"
-					value="Reset" /></td>
+				<td><input type="submit" value="Submit" /> <input type="reset"	value="Reset" onclick="customReset();"/></td>
 			</tr>
 		</table>
 	</form:form>

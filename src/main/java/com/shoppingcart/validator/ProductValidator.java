@@ -34,7 +34,7 @@ public class ProductValidator implements Validator{
 		if(code != null && code.length() > 0) {
 			if(code.matches("\\s+")) {
 				errors.rejectValue("code", "Pattern.productForm.code");
-			}else if(productInfo.isNewProduct()) {
+			}else if(productInfo.isNewProduct()){
 				Product product = productDAO.getProductByCode(code);
 				if(product != null) {
 					errors.rejectValue("code", "Duplicate.productForm.code");

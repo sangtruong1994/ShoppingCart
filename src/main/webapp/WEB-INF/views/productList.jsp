@@ -52,7 +52,7 @@
 				<c:if test="${page != -1}">
 					<a href="productList?page=${page}" class="nav-item">${page}</a>
 				</c:if>
-				<c:if test="${page != 1}">
+				<c:if test="${page == -1}">
 					<span class="nav-item"> ... </span>
 				</c:if>
 			</c:forEach>

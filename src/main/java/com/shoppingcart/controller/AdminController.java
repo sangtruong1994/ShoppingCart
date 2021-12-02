@@ -103,6 +103,7 @@ public class AdminController {
 			productInfo = new ProductInfo();
 			productInfo.setNewProduct(true);
 		}
+		model.addAttribute("productForm", productInfo);
 		return "product";
 	}
 	

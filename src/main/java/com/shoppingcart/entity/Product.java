@@ -28,7 +28,7 @@ public class Product implements Serializable{
 	private double price;
 	
 	@Lob
-	@Column(name = "Image",length = Integer.MAX_VALUE, nullable = false)
+	@Column(name = "Image",length = Integer.MAX_VALUE, nullable = true)
 	private byte[] image;
 	
 	@Temporal(TemporalType.TIMESTAMP)
