@@ -10,9 +10,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Account Info</title>
-<style type="text/css">
-  <%@include file="css/styles.css" %> 
-</style>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css" />
 </head>
 <body>
 	<jsp:include page="_header.jsp" />

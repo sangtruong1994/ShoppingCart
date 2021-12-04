@@ -10,13 +10,13 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Shopping Cart</title>
-<style type="text/css">
-  <%@include file="css/styles.css" %> 
-</style>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/font-awesome.min.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/responsive.css" />
 </head>
 <body>
 	<jsp:include page="_header.jsp" />
-	<jsp:include page="_menu.jsp" />
 	<fmt:setLocale value="en_US" scope="session" />
 	
 	<div class="page-title">My Cart</div>
