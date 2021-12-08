@@ -4,14 +4,13 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 
 public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
-	
 	 @Override
-	protected Class<?>[] getRootConfigClasses() { //-->là cấu hình chung
+	protected Class<?>[] getRootConfigClasses() {
 		return new Class[] { WebMvcConfig.class };
 	}
 
 	@Override
-	protected Class<?>[] getServletConfigClasses() { //-->là cấu hình riêng
+	protected Class<?>[] getServletConfigClasses() {
 		return new Class[] { AppContext.class};
 	}
 

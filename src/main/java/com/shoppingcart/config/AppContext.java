@@ -51,7 +51,7 @@ public class AppContext {
 		return properties;
 	}
 
-	@Bean //để đọc file sessionFactoryBean
+	@Bean
 	public HibernateTransactionManager getTransactionManager() {
 		HibernateTransactionManager transactionManager = new HibernateTransactionManager();
 		transactionManager.setSessionFactory(sessionFactory().getObject());

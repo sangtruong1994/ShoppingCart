@@ -14,7 +14,7 @@ import com.shoppingcart.authentication.MyDBAuthenticationService;
 
 @Configuration
 @EnableWebSecurity
-public class WebSevurityConfig extends WebSecurityConfigurerAdapter{
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
 	@Qualifier("myDBAuthenticationService")
@@ -30,18 +30,18 @@ public class WebSevurityConfig extends WebSecurityConfigurerAdapter{
 		
 		http.csrf().disable();
 		http.authorizeRequests().antMatchers("/orderlist","/order","/accountInfo")
-		.access("hasAnyRole('EMPLOYEE','MANAGER')");//
+		.access("hasAnyRole('EMPLOYEE','MANAGER')");
 		
-		http.authorizeRequests().antMatchers("/product").access("hasRole('MANAGER')");
+		http.authorizeRequests().antMatchers("/product","/accountList", "/account").access("hasRole('MANAGER')");
 		
 		http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
 		
 		http.authorizeRequests().and().formLogin()
-			.loginProcessingUrl("/j_spring_sevurity_check")
+			.loginProcessingUrl("/j_spring_security_check")
 			.loginPage("/login")
 			.defaultSuccessUrl("/accountInfo")
 			.failureUrl("/login?error=true")
-			.usernameParameter("userName")
+			.usernameParameter("username")
 			.passwordParameter("password")
 			.and()
 			.logout()
@@ -51,8 +51,6 @@ public class WebSevurityConfig extends WebSecurityConfigurerAdapter{
 		
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
-		//auth.inMemoryAuthentication().withUser("employee").password("employee").authorities("ROLE_EMPLOYEE");
-		//auth.inMemoryAuthentication().withUser("manager").password("manager").authorities("ROLE_MANAGER");
 		auth.userDetailsService(myDBAuthenticationService);
 	}
 	

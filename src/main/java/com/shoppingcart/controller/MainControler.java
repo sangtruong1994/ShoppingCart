@@ -135,47 +135,43 @@ public class MainControler {
 	public String shoppingCartCustomer(HttpServletRequest request,  Model model,
 			@ModelAttribute("customerForm") @Validated CustomerInfo customerForm, BindingResult result) {
 		customerInfoValidator.validate(customerForm, result);
-		//kết quả Validate CustomerInfo
+
 		if(result.hasErrors()) {
 			customerForm.setValid(false);
-			//Forward tới trang nhập lại
+
 			return "shoppingCartCustomer";
 		}
 		
 		customerForm.setValid(true);
 		CartInfo cartInfo = Utils.getCartInfoInSession(request);
 		cartInfo.setCustomerInfo(customerForm);
-		//chuyển hướng qua trang xác nhận
+
 		return "redirect:/shoppingCartConfirmation";
 	}
 	
-	//GET xem lai thong tin xac nhan
 	@RequestMapping(value = {"/shoppingCartConfirmation"}, method = RequestMethod.GET)
 	public String shoppingCartConfirmationReview(HttpServletRequest request,  Model model) {
 		CartInfo cartInfo = Utils.getCartInfoInSession(request);
 		
-		// chưa mua mặt hàng nào;
 		if(cartInfo.isEmpty()) {
-			// chuyen toi trang danh gio hang
+
 			return "redirect:/shoppingCart";
 		}else if (!cartInfo.isValidCustomer()) {
-			//chuyen toi trang nhap thong tin
+
 			return "redirect:/shoppingCartCustomer";
 		}
 		return "shoppingCartConfirmation";
 	}
 	
-	//POST: Gui don hang (Save).
 	@RequestMapping(value = {"/shoppingCartConfirmation"}, method = RequestMethod.POST)
 	public String shoppingCartConfirmationSave(HttpServletRequest request,  Model model) {
 		CartInfo cartInfo = Utils.getCartInfoInSession(request);
 		
-		//chua mua mat hang nao
 		if(cartInfo.isEmpty()) {
-			//chuyen toi trang gio hang
+
 			return "redirect:/shoppingCart";
 		}else if (!cartInfo.isValidCustomer()) {
-			//chuyen toi trang nhap thong tin
+
 			return "redirect:/shoppingCartCustomer";
 		}
 		
@@ -185,13 +181,10 @@ public class MainControler {
 			return "shoppingCartConfirmation";
 		}
 		
-		//xoa gio hang khoi session
 		Utils.removeCartInfoInSession(request);
 		
-		//luu thoong tin don hang da xac nhan mua
 		Utils.storeLastOrderedCartInfoInSession(request, cartInfo);
 		
-		//chuyen huong toi trang hoan thanh mua hang
 		return "redirect:/shoppingCartFinalize";
 	}
 	

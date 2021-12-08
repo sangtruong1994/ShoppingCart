@@ -6,25 +6,23 @@ import java.util.List;
 public class OrderInfo {
 
 	private String id;
-	
+
 	private Date orderDate;
-	
+
 	private int orderNum;
-	
+
 	private double amount;
-	
+
 	private String customerName;
-	
+
 	private String customerAddress;
-	
+
 	private String customerEmail;
-	
+
 	private String customerPhone;
-	
+
 	private List<OrderDetailInfo> orderDetailInfos;
 
-	//Using for Hibernate Query
-	//sử dung Hibernate Query
 	public OrderInfo(String id, Date orderDate, int orderNum, double amount, String customerName,
 			String customerAddress, String customerEmail, String customerPhone) {
 		super();
@@ -109,5 +107,5 @@ public class OrderInfo {
 	public void setOrderDetailInfos(List<OrderDetailInfo> orderDetailInfos) {
 		this.orderDetailInfos = orderDetailInfos;
 	}
-	
+
 }

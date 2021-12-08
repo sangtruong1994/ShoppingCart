@@ -10,9 +10,12 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Header</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/responsive.css" />
 </head>
 <body>
-	<header class="header_section" style="background-color: #00B2EE;">
+	<header class="header_section">
 		<div class="container-fluid">
 			<nav class="navbar navbar-expand-lg custom_nav-container">
 				<a class="navbar-brand" href="${contextPath}/">
@@ -20,7 +23,7 @@
 				</a>
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav">
-					<li class="nav-item active" style="color: white;">
+					<li class="nav-item active">
 						<a class="nav-link" href="${contextPath}/">Home</a>
 					</li>
 					<li class="nav-item">
@@ -38,6 +41,10 @@
 					<security:authorize access="hasRole('ROLE_MANAGER')">
 					<li class="nav-item">
 						<a class="nav-link" href="${contextPath}/product">Create Product</a>
+						
+					</li>
+					<li class="nav-item">
+						<a class="nav-link"  href="${contextPath}/accountList"> User Management </a>
 					</li>
 					</security:authorize>
 				</ul>

@@ -12,58 +12,67 @@
 <title>Shopping Cart</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/font-awesome.min.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/responsive.css" />
 </head>
 <body>
 	<jsp:include page="_header.jsp" />
 	<fmt:setLocale value="en_US" scope="session" />
 	
-	<div class="page-title">My Cart</div>
-	
-	<c:if test="${empty cartForm or empty cartForm.cartLineInfos }">
-		<h2>There is no items in Cart</h2>
-		<a href="${contextPath}/productList">Show Product List</a>
-	</c:if>
-	
-	<c:if test="${not empty cartForm and not empty cartForm.cartLineInfos }">
-		<form:form method="POST" modelAttribute="cartForm" action="${contextPath}/shoppingCart">
-		
-			<c:forEach items="${cartForm.cartLineInfos }" var="cartLineInfo" varStatus="varStatus">
-				<div class="product-preview-container">
-					<ul>
-						<li><img class="product-image" src="${contextPath}/productImage?code=${cartLineInfo.productInfo.code}"/>
-						</li>
-						<li>Code: ${cartLineInfo.productInfo.code}
-							<form:hidden path="cartLineInfos[${varStatus.index }].productInfo.code"/>
-						</li>
-						<li>Name: ${cartLineInfo.productInfo.name}</li>
-						<li>Price: 
-							<span class="price">
-								<fmt:formatNumber value="${cartLineInfo.productInfo.price}" type="currency"></fmt:formatNumber>
-							</span>
-						</li>
-						<li>Quantity
-							<form:input path="cartLineInfos[${varStatus.index}].quantity" />
-						</li>
-						<li>Subtotal:
-							<span class="subtotal">
-							<fmt:formatNumber value="${cartLineInfo.amount }" type="currency"></fmt:formatNumber>
-							</span>
-						</li>
-						<li>
-							<a href="${contextPath}/shoppingCartRemoveProduct?code=${cartLineInfo.productInfo.code}">Delete</a>
-						</li>
-					</ul>
-				</div>			
-			</c:forEach>
+	<section class="shop_section layout_padding">
+		<div class="container" >
+			<div class="heading_container heading_center">
+				<h2>My Cart</h2>
+			</div>
+			<c:if test="${empty cartForm or empty cartForm.cartLineInfos }">
+				<h3>There is no items in Cart</h3>
+				<a href="${contextPath}/productList">Show Product List</a>
+			</c:if>
 			
-			<div style="clear: both;"></div>
-				<input class="button-update-sc" type="submit" value="Update Quantity">
-			<a class="navi-item" href="${contextPath}/shoppingCartCustomer"> Enter Customer</a>
-			<a class="navi-item" href="${contextPath}/productList">Continue Buy </a>
-		</form:form>
-	</c:if>
+			<c:if test="${not empty cartForm and not empty cartForm.cartLineInfos }">
+				<form:form method="POST" modelAttribute="cartForm" action="${contextPath}/shoppingCart">
+					<c:forEach items="${cartForm.cartLineInfos }" var="cartLineInfo" varStatus="varStatus">
+						<div class="row" style="display: inline-block; margin-left: 180px;">
+							<div class="col-sm-6 col-xl-3" >
+								<div class="box" style="width: 250px; height: auto;">
+									<ul style="list-style-type: none;">
+										<li><img style="width: 120px; height: 80px;" src="${contextPath}/productImage?code=${cartLineInfo.productInfo.code}"/>
+										<li>Code: ${cartLineInfo.productInfo.code}
+											<form:hidden path="cartLineInfos[${varStatus.index }].productInfo.code"/>
+										</li>
+										<li>Name: ${cartLineInfo.productInfo.name}</li>
+										<li>Price: 
+											<span class="price">
+												<fmt:formatNumber value="${cartLineInfo.productInfo.price}" type="currency"></fmt:formatNumber>
+											</span>
+										</li>
+										<li>Quantity
+											<form:input path="cartLineInfos[${varStatus.index}].quantity" />
+										</li>
+										<li>Subtotal:
+											<span class="subtotal">
+											<fmt:formatNumber value="${cartLineInfo.amount }" type="currency"></fmt:formatNumber>
+											</span>
+										</li>
+										<li>
+											<a style="color: red;" href="${contextPath}/shoppingCartRemoveProduct?code=${cartLineInfo.productInfo.code}">Delete</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+					<div class="box" style="width: 500px; height: auto; text-align: center; margin-left: 340px; font-size: 20px">
+						<input style="border-radius: 10px; color: white; background-color: blue;" type="submit" value="Update Quantity">
+						<a style="padding-left: 20px; color: green;" class="navi-item" href="${contextPath}/shoppingCartCustomer"> Enter Customer</a>
+						<a style="padding-left: 20px; color: blue;" class="navi-item" href="${contextPath}/productList">Continue Buy </a>
+					</div>
+				</form:form>
+			</c:if>
+		</div>
+	</section>
+	
+	<div style="margin-bottom: 480px;"></div>
+	
 	<jsp:include page="_footer.jsp" />
 </body>
 </html>

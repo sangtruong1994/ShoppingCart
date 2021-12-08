@@ -9,6 +9,10 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Menu</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/font-awesome.min.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/responsive.css" />
 </head>
 <body>
 	<div class="menu-container">

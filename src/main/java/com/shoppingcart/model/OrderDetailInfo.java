@@ -14,8 +14,6 @@ public class OrderDetailInfo {
 	
 	private double amount;
 
-	//Using for Hibernate Query
-	//Sử dụng cho Hibernate Query
 	public OrderDetailInfo(String id, String productCode, String productName, int quantity, double price,
 			double amount) {
 		super();

@@ -79,7 +79,6 @@ public class PaginationResult<E> {
 		this.navigationPages = navigationPages;
 	}
 
-	//tổng  sản phẩm có trong 1 page
 	public PaginationResult(Query query, int page, int maxResult, int maxNavigationPage) {
 		int pageIndex = page - 1 < 0 ? 0 : page - 1;
 		int fromRecordIndex = pageIndex * maxResult;
@@ -96,13 +95,12 @@ public class PaginationResult<E> {
 				do {
 					E record = (E) resultsScroll.get(0);
 					results.add(record);
-				} while (resultsScroll.next() //có nhiệm vụ kiểm tra phần tử kế tiếp có tồn tại hay ko, nếu có sẽ trỏ tới phần tử kế tiếp
-						&& resultsScroll.getRowNumber() >= fromRecordIndex
+				} while (resultsScroll.next() && resultsScroll.getRowNumber() >= fromRecordIndex
 						&& resultsScroll.getRowNumber() < maxRecordIndex);
 			}
 			resultsScroll.last();
 		}
-		//tổng bản ghi
+
 		this.totalRecords = resultsScroll.getRowNumber() + 1;
 		this.currentPage = pageIndex + 1;
 		this.list = results;
@@ -123,8 +121,8 @@ public class PaginationResult<E> {
 
 		int current = this.currentPage > this.totalPages ? this.totalPages : this.currentPage;
 
-		int begin = current - this.maxNavigationPages / 2;//1 - 10/2 = -4
-		int end = current + this.maxNavigationPages / 2;//1 + 10/2 = 6
+		int begin = current - this.maxNavigationPages / 2;
+		int end = current + this.maxNavigationPages / 2;
 
 		this.navigationPages.add(1);
 		if (begin > 2) {

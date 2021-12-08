@@ -26,7 +26,6 @@ public class ProductDAOImpl implements ProductDAO {
 	public PaginationResult<ProductInfo> getAllProductInfos(int page, int maxResult, int maxNavigationPage,
 			String likeName) {
 		Session session = sessionFactory.getCurrentSession();
-		// muốn sử dụng NEW " + ProductInfo
 		String hql = " SELECT NEW " + ProductInfo.class.getName()
 				+ " (PRO.code, PRO.name, PRO.price) FROM Product PRO ";
 		if (likeName != null && likeName.length() > 0) {
@@ -56,7 +55,7 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public ProductInfo getProductInfoByCode(String code) {
 		Product product = getProductByCode(code);
-		if(product == null) {
+		if (product == null) {
 			return null;
 		}
 		ProductInfo productInfo = new ProductInfo(product.getCode(), product.getName(), product.getPrice());
@@ -69,11 +68,11 @@ public class ProductDAOImpl implements ProductDAO {
 		String code = productInfo.getCode();
 		Product product = null;
 		boolean isNew = false;
-		
-		if(code != null) {
+
+		if (code != null) {
 			product = getProductByCode(code);
 		}
-		if(product == null) {
+		if (product == null) {
 			isNew = true;
 			product = new Product();
 			product.setCreateDate(new Date());
@@ -81,18 +80,31 @@ public class ProductDAOImpl implements ProductDAO {
 		product.setCode(code);
 		product.setName(productInfo.getName());
 		product.setPrice(productInfo.getPrice());
-		
-		if(productInfo.getFileData() != null) {
+
+		if (productInfo.getFileData() != null) {
 			byte[] image = productInfo.getFileData().getBytes();
-			if(image != null && image.length > 0) {
+			if (image != null && image.length > 0) {
 				product.setImage(image);
 			}
 		}
-		if(isNew) {
+		if (isNew) {
 			session.persist(product);
 		}
-		//nếu có lỗi tại DB, ngoại lệ sẽ ném ra ngay lập tức
 		session.flush();
+	}
+
+	public boolean removeProductByCode(String code) {
+		try {
+			Session session = sessionFactory.getCurrentSession();
+			String hql = "DELETE FROM Product PRO WHERE PRO.code = :code1";
+			Query query = session.createQuery(hql);
+			query.setParameter("code1", code);
+			query.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return false;
 	}
 
 }

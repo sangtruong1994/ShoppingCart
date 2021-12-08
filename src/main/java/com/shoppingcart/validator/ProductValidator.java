@@ -11,11 +11,11 @@ import com.shoppingcart.entity.Product;
 import com.shoppingcart.model.ProductInfo;
 
 @Component
-public class ProductValidator implements Validator{
+public class ProductValidator implements Validator {
 
 	@Autowired
 	private ProductDAO productDAO;
-	
+
 	@Override
 	public boolean supports(Class<?> clazz) {
 		return ProductInfo.class.isAssignableFrom(clazz);
@@ -24,19 +24,18 @@ public class ProductValidator implements Validator{
 	@Override
 	public void validate(Object target, Errors errors) {
 		ProductInfo productInfo = (ProductInfo) target;
-		
-		//kiểm tra các trường hợp (field) của ProductInfo
+
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "code", "NotEmpty.productForm.code");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEmpty.productForm.name");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "price", "NotEmpty.productForm.price");
-		
+
 		String code = productInfo.getCode();
-		if(code != null && code.length() > 0) {
-			if(code.matches("\\s+")) {
+		if (code != null && code.length() > 0) {
+			if (code.matches("\\s+")) {
 				errors.rejectValue("code", "Pattern.productForm.code");
-			}else if(productInfo.isNewProduct()){
+			} else if (productInfo.isNewProduct()) {
 				Product product = productDAO.getProductByCode(code);
-				if(product != null) {
+				if (product != null) {
 					errors.rejectValue("code", "Duplicate.productForm.code");
 				}
 			}

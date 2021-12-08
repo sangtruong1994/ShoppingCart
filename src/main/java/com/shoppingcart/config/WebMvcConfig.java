@@ -13,9 +13,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-@Configuration // Luôn đi với @Bean
-@EnableWebMvc // giải thích EnableWebMvc
-@ComponentScan(basePackages = { "com.shoppingcart.*" }) //cực kì quan trọng
+@Configuration
+@EnableWebMvc
+@ComponentScan(basePackages = { "com.shoppingcart.*" })
 public class WebMvcConfig implements WebMvcConfigurer {
 
 	@Bean
