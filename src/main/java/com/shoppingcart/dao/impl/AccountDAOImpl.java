@@ -69,7 +69,6 @@ public class AccountDAOImpl implements AccountDAO {
 
 	}
 
-	// newly added
 	public boolean removeAccountByUsername(String username) {
 		try {
 			Session session = sessionFactory.getCurrentSession();

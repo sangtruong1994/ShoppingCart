@@ -277,7 +277,7 @@ table.table .avatar {
 				</table>
 
 				<c:if test="${paginationAccountInfos.totalPages > 1}">
-					<div class="pagination">
+					<div class="pagination" style=" font-size: 20px;">
 
 						<c:forEach items="${paginationAccountInfos.navigationPages}"
 							var="page">

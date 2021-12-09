@@ -183,9 +183,11 @@ label.light {
 			<form12:errors path="active" class="error-message"></form12:errors>
 
 		</fieldset>
-		<button type="submit">Apply &nbsp;</button>
+		<button style="margin-bottom: 10px; margin-top: 10px; border-radius: 5px;" type="submit">Apply &nbsp;</button>
 		<button class="reset" type="reset" onclick="customReset();">Reset</button>
 	</form12:form>
+	
+	<div style="margin-bottom: 240px;"></div>
 	
 	<jsp:include page="_footer.jsp" />
 </body>
