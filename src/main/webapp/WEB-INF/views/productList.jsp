@@ -22,7 +22,7 @@
 	<section class="shop_section layout_padding">
 		<div class="container" >
 			<div class="heading_container heading_center">
-				<h2>Product List</h2>
+				<h2>Product List 123</h2>
 			</div>
 			
 			<c:forEach items="${paginationProductInfos.list}" var="productInfo">
