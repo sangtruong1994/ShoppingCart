@@ -17,48 +17,40 @@
 <body>
 	<jsp:include page="_header.jsp" />
 	
-	<section class="contact_section">
+	<section class="client_section layout_padding">
 		<div class="container">
-			<h2>Account Info</h2>
-			<div class="row">
-				<div class="col-md-6">
-					<div class="form_container">
-						<ul>
-							<li>User name: ${name}</li>
-							<li>Role:
-							<ul>
-								<c:forEach items="${userDetails.authorities }" var="auth">
-									<li>${auth.authority }</li>
-								</c:forEach>
-							</ul>
-							</li>
-						</ul>
+			<div class="heading_container heading_center">
+				<h2>Account Info</h2>
+			</div>
+			<div class="carousel-wrap ">
+				<div class="owl-carousel client_owl-carousel">
+					<div class="item">
+						<div class="box">
+							<div class="img-box">
+								<img alt="" src="${contextPath}/img/user1.png">
+							</div>
+							<div class="detail-box">
+								<div class="client_info">
+									<div class="client_name">
+										<h5>User name: ${name}</h5>
+										<h5 style="text-align: left;">Role:
+											<ul>
+												<c:forEach items="${userDetails.authorities }" var="auth">
+													<li>${auth.authority }</li>
+												</c:forEach>
+											</ul>
+										</h5>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div style="margin-bottom: 650px;"></div>
+		<div style="margin-bottom: 245px;"></div>
 	</section>
-	
-	<!-- 
-	<div class="page-title">Account Info</div>
-	
-	<div class="account-container">
-		<ul>
-			<li>User name: ${name}</li>
-			<li>Role:
-				<ul>
-					<c:forEach items="${userDetails.authorities }" var="auth">
-						<li>${auth.authority }</li>
-					</c:forEach>
-				</ul>
-			</li>
-		</ul>
-	</div>
-	 -->
-
-	
-	
+		
 	<jsp:include page="_footer.jsp" />
 </body>
 </html>

@@ -30,7 +30,7 @@ public class AccountInfoValidator implements Validator{
 
 		String username = accountInfo.getUsername();
 		accountDB = accountDAO.getAccountByUserName(username);
-		if(username.equals(accountDB)) {
+		if(username.equals(accountDB.getUsername())) {
 			errors.rejectValue("username", "Duplicate.accountForm.username");
 		}
 		

@@ -63,21 +63,5 @@
 		</div>
 	</header>
 	
-	<!-- 
-	<div class="header-container"> 
-		<div class="container-fluid">Online Shop</div>
-		<div class="header-bar">
-			<c:if test="${name != null}">
-				Hello <a href="${contextPath }/accountInfo">${name }</a>
-				&nbsp; &nbsp;
-				<a href="${contextPath }/logout">Logout</a>
-			</c:if>
-			<c:if test="${name == null}">
-				<a href="${contextPath }/login">Login</a>
-			</c:if>
-		</div>
-	</div>
-	 -->
-	
 </body>
 </html>

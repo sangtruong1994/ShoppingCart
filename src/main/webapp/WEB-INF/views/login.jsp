@@ -143,7 +143,6 @@ svg {
 </style>
 </head>
 <body class="align">
-	<jsp:include page="_header.jsp" />	
 	
 	<div class="login">
 
@@ -195,6 +194,6 @@ svg {
 
   </svg>
 	
-	<jsp:include page="_footer.jsp" />
+	<!--<jsp:include page="_footer.jsp" />-->
 </body>
 </html>

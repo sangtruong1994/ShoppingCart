@@ -144,18 +144,17 @@ label.light {
 		modelAttribute="accountForm">
 
 		<fieldset>
-			<form12:errors style="color: red;" path="username"
-				class="error-message"></form12:errors>
 			<label for="username">Username:</label>
 			<c:if test="${not empty accountForm.username}">
-						<form12:input type="text" id="username" path="username"
-				placeholder="Enter your username" /> ${accountForm.username}
+						<form12:hidden path="username"/> ${accountForm.username}
 				</c:if>
 				<c:if test="${empty accountForm.username}">
 						<form12:input type="text" id="username" path="username"
 				placeholder="Enter your username" />
 				</c:if>
-
+				<form12:errors style="color: red;" path="username"
+				class="error-message"></form12:errors>
+				
 			<div>
 				<form12:errors style="color: red;" path="password"
 					class="error-message"></form12:errors>
