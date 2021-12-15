@@ -44,7 +44,7 @@
 						
 					</li>
 					<li class="nav-item">
-						<a class="nav-link"  href="${contextPath}/accountList"> User Management </a>
+						<a class="nav-link"  href="${contextPath}/accountList"> Account Management </a>
 					</li>
 					</security:authorize>
 				</ul>

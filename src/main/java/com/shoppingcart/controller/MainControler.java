@@ -42,7 +42,7 @@ public class MainControler {
 	@RequestMapping({"/productList"})
 	public String getAllProductInfos(Model model, @RequestParam(value = "name", defaultValue = "") String likeName,
 			@RequestParam(value = "page", defaultValue = "1") int page) {
-		final int maxResult = 5;
+		final int maxResult = 15;
 		final int maxNavigationPage = 10;
 		PaginationResult<ProductInfo> productInfos = productDAO.getAllProductInfos(page, maxResult, maxNavigationPage, likeName);
 		

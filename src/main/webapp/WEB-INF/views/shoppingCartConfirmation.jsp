@@ -59,7 +59,7 @@
 								<li>Quantity: ${cartLineInfo.quantity}</li>
 								<li>Subtotal: 
 									<span class="subtotal">
-										<fmt:formatNumber value="${cartLineInfo.amount}"></fmt:formatNumber>
+										<fmt:formatNumber value="${cartLineInfo.amount}" type="currency"></fmt:formatNumber>
 									</span>
 								</li>
 							</ul>

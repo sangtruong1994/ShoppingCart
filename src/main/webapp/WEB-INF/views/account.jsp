@@ -156,11 +156,11 @@ label.light {
 				class="error-message"></form12:errors>
 				
 			<div>
+				<label for="password">Password:</label>
+				<form12:input type="text" id="password" path="password"
+					placeholder="Enter your password" />
 				<form12:errors style="color: red;" path="password"
 					class="error-message"></form12:errors>
-				<label for="password">Password:</label>
-				<form12:input type="password" id="password" path="password"
-					placeholder="Enter your password" />
 			</div>
 
 			<form12:errors style="color: red;" path="userRole"

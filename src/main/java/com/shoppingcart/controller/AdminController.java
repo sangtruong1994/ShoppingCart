@@ -84,7 +84,7 @@ public class AdminController {
 			System.out.println(e.getMessage());
 		}
 
-		final int MAX_RESULT = 5;
+		final int MAX_RESULT = 15;
 		final int MAX_NAVIGATION_PAGE = 10;
 		PaginationResult<OrderInfo> paginationOrderInfos = orderDAO.getAllOrderInfos(page, MAX_RESULT,
 				MAX_NAVIGATION_PAGE);

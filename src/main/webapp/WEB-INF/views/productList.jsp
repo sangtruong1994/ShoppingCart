@@ -20,9 +20,19 @@
 	<fmt:setLocale value="en_US" scope="session" />
 	
 	<section class="shop_section layout_padding">
+	<form method="GET" action="${contextPath}/productList">
 		<div class="container" >
 			<div class="heading_container heading_center">
-				<h2>Product List 123</h2>
+				<h2>Product List</h2>				
+					<table>
+						<tr>
+							<td ><input style="margin-right: 5px;" type="text" name="name"></td>
+							<td colspan="2" align="center">
+								<input style="color: white; background-color: #33CC00; border-radius: 5px;" type="submit" value="Search">
+							</td>
+						</tr>
+					</table>	
+						
 			</div>
 			
 			<c:forEach items="${paginationProductInfos.list}" var="productInfo">
@@ -56,6 +66,7 @@
 				</div>
 			</c:forEach>					
 		</div>
+		</form>		
 	</section>
 	
 	<br />

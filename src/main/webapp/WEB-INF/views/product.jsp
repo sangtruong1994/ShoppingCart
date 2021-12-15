@@ -33,7 +33,7 @@
 						<table style="text-align: left; font-size: 20px;">
 							<tr>
 								<td>Code *</td>
-								<td style="color: red;"><c:if test="${not empty productForm.code}">
+								<td><c:if test="${not empty productForm.code}">
 										<form:hidden path="code" /> ${productForm.code}
 									</c:if> 
 									<c:if test="${empty productForm.code}">
@@ -41,13 +41,13 @@
 										<form:hidden path="newProduct" />
 								</c:if></td>
 				
-								<td><form:errors path="code" class="error-message" /></td>
+								<td style="color: red;"><form:errors path="code" class="error-message" /></td>
 							</tr>
 							
 							<tr>
 								<td>Name *</td>
 								<td><form:input path="name" /></td>
-								<td><form:errors path="name" class="error-message" /></td>
+								<td style="color: red;"><form:errors path="name" class="error-message" /></td>
 							</tr>
 							
 							<tr>

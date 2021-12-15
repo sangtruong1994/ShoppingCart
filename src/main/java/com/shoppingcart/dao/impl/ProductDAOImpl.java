@@ -29,16 +29,17 @@ public class ProductDAOImpl implements ProductDAO {
 		String hql = " SELECT NEW " + ProductInfo.class.getName()
 				+ " (PRO.code, PRO.name, PRO.price) FROM Product PRO ";
 		if (likeName != null && likeName.length() > 0) {
-			hql += " WHERE LOWER(PRO.name) LIKE :LIKENAME ";
+			hql += " WHERE LOWER(PRO.name) like :LIKENAME ";
 		}
 		hql += " ORDER BY PRO.createDate DESC ";
 
 		Query<ProductInfo> query = session.createQuery(hql);
-		List<ProductInfo> productInfos = query.list();
 
 		if (likeName != null && likeName.length() > 0) {
 			query.setParameter("LIKENAME", "%" + likeName.toLowerCase() + "%");
 		}
+		List<ProductInfo> productInfos = query.list();
+		
 		return new PaginationResult<ProductInfo>(query, page, maxResult, maxNavigationPage);
 	}
 
